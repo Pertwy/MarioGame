@@ -118,21 +118,23 @@ $(document).ready(function() {
     boardContent += rowContent;
   }
 
+
   appContainer.html(boardContent);
   
 
-  //change this variable to make mario move
+  //Position of Mario. change this variable to make mario move
   let currentPosition = {
     x: startPosition.x,
     y: startPosition.y,
   };
-
+  // Determines the direction mario move in. Starts standing still
   let currentDirection = {
-      x: 0,
-      y: 0,
-    };
+    x: 0,
+    y: 0,
+  };
+
   
-  //initiate Mario
+  //Initiate Mario
   let marioLocationClass = '.row-' + currentPosition.x + '.col-' + currentPosition.y;
   $(marioLocationClass).addClass('mario-location');
 
@@ -140,6 +142,7 @@ $(document).ready(function() {
   //Move mario (add new class, remove previous)
   function moveMario(){
     let marioOldLocationClass = '.row-' + currentPosition.x + '.col-' + currentPosition.y;
+    
     currentPosition.x += currentDirection.x
     currentPosition.y += currentDirection.y
     let marioLocationClass = '.row-' + currentPosition.x + '.col-' + currentPosition.y;
@@ -147,6 +150,7 @@ $(document).ready(function() {
     $(marioOldLocationClass).removeClass('mario-location');
     $(marioLocationClass).addClass('mario-location');
   }
+
 
   //remove mushroom if stepped on
   function removeMushroom(){
@@ -158,7 +162,8 @@ $(document).ready(function() {
     }
   }
 
-  //reverse marios direction if he hits a wall
+
+  //Reverse marios direction if he hits a wall
   function reverseMovement(){
     if (currentDirection.x){
       if (currentPosition.x + currentDirection.x === -1) currentDirection.x = 1
@@ -213,7 +218,7 @@ $(document).ready(function() {
   };
 
 
-  //Main function which loops every "gameSpeed" seconds
+  //Main function which loops every "gameSpeed" msecs
   function startTimer(){
     reverseMovement()
     moveMario()
@@ -224,5 +229,3 @@ $(document).ready(function() {
   startTimer()
 
 });
-
-
